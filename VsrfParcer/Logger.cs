@@ -8,14 +8,14 @@
             string fullMessage = $"{DateTime.Now:hh:mm:ss} | {message}";
             if (!Directory.Exists("logs"))
                 Directory.CreateDirectory("logs");
-            using var streamWriter = File.AppendText(fullName);
+			using StreamWriter streamWriter = File.AppendText(fullName);
             streamWriter.WriteLine(fullMessage);
             Console.WriteLine(fullMessage);
         }
 
         public static void DeleteOldLogs()
         {
-            foreach (var file in Directory.GetFiles("logs"))
+            foreach (string file in Directory.GetFiles("logs"))
             {
                 if ((DateTime.Now - File.GetCreationTime(file)).TotalDays > 14)
                 {
